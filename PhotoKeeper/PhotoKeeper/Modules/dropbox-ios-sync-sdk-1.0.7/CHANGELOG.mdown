@@ -1,0 +1,48 @@
+Changes to the Sync API for iOS
+===============================
+
+Changes in 1.0.7
+----------------
+- add the -[DBFilesystem addObserver:block:] method which allows you to get updates when
+  the filesystem's status, shutDown, or completedFirstSync properties change.
+- add -[DBAccountManager linkedAccounts] to allow linking to multiple user accounts
+- fix leak when unlinking accounts
+- fix error on long-running uploads
+- fix leak of file descriptor when writing a file
+
+Changes in 1.0.6
+----------------
+- fix authentication bug
+- rename enum DBSyncStatus to DBSyncStatusFlags to avoid errors when compiling
+  Objective-C++
+
+Changes in 1.0.5
+----------------
+- fix memory leaks
+
+Changes in 1.0.4
+----------------
+- fix unnecessary redownloading of files written locally
+- fix regression from 1.0.3 where files that were closed couldn't be opened again
+- make sure DBSyncStatus always reports uploading when a file is uploading
+- fix a possible hang during DBFilesystem startup
+
+Changes in 1.0.3
+----------------
+- don't call a DBFilesystem path observer if a file's download progress changes
+- better error messages if you try to use a closed file
+- don't warn if -[DBFilesystem fileInfoForPath:error:] is called on a file that doesn't exist
+- don't warn on successful call to -[DBFile update]
+
+Changes in 1.0.2
+----------------
+- actually block when you read an uncached file
+- report the correct download progress
+
+Changes in 1.0.1
+----------------
+- bug fixes
+
+Changes in 1.0
+--------------
+- initial release of Sync API for iOS

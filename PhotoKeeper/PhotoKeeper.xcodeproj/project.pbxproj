@@ -34,6 +34,11 @@
 		35A4670A1549DD34001B56F7 /* PTKEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A467091549DD34001B56F7 /* PTKEntryCell.m */; };
 		35A4670F1549E3A3001B56F7 /* defaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 35A4670D1549E3A3001B56F7 /* defaultImage.png */; };
 		35A467101549E3A3001B56F7 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 35A4670E1549E3A3001B56F7 /* warning.png */; };
+		A132094E173B37DC0012C61F /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A132094D173B37DC0012C61F /* Dropbox.framework */; };
+		A1320950173B38340012C61F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A132094F173B38340012C61F /* CFNetwork.framework */; };
+		A1320952173B383E0012C61F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1320951173B383E0012C61F /* Security.framework */; };
+		A1320954173B384A0012C61F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1320953173B384A0012C61F /* SystemConfiguration.framework */; };
+		A1320956173B38520012C61F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1320955173B38520012C61F /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +89,11 @@
 		35A467091549DD34001B56F7 /* PTKEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTKEntryCell.m; sourceTree = "<group>"; };
 		35A4670D1549E3A3001B56F7 /* defaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultImage.png; sourceTree = "<group>"; };
 		35A4670E1549E3A3001B56F7 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		A132094D173B37DC0012C61F /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = "PhotoKeeper/Modules/dropbox-ios-sync-sdk-1.0.7/Dropbox.framework"; sourceTree = "<group>"; };
+		A132094F173B38340012C61F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A1320951173B383E0012C61F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A1320953173B384A0012C61F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A1320955173B38520012C61F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,9 +101,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1320956173B38520012C61F /* QuartzCore.framework in Frameworks */,
+				A1320954173B384A0012C61F /* SystemConfiguration.framework in Frameworks */,
+				A1320952173B383E0012C61F /* Security.framework in Frameworks */,
+				A1320950173B38340012C61F /* CFNetwork.framework in Frameworks */,
 				35A466CA154980F8001B56F7 /* UIKit.framework in Frameworks */,
 				35A466CC154980F8001B56F7 /* Foundation.framework in Frameworks */,
 				35A466CE154980F8001B56F7 /* CoreGraphics.framework in Frameworks */,
+				A132094E173B37DC0012C61F /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +158,11 @@
 		35A466C8154980F8001B56F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A1320955173B38520012C61F /* QuartzCore.framework */,
+				A1320953173B384A0012C61F /* SystemConfiguration.framework */,
+				A1320951173B383E0012C61F /* Security.framework */,
+				A132094F173B38340012C61F /* CFNetwork.framework */,
+				A132094D173B37DC0012C61F /* Dropbox.framework */,
 				35A466C9154980F8001B56F7 /* UIKit.framework */,
 				35A466CB154980F8001B56F7 /* Foundation.framework */,
 				35A466CD154980F8001B56F7 /* CoreGraphics.framework */,
@@ -400,6 +420,10 @@
 		35A466E7154980F8001B56F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/PhotoKeeper/Modules/dropbox-ios-sync-sdk-1.0.7\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoKeeper/PhotoKeeper-Prefix.pch";
 				INFOPLIST_FILE = "PhotoKeeper/PhotoKeeper-Info.plist";
@@ -411,6 +435,10 @@
 		35A466E8154980F8001B56F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/PhotoKeeper/Modules/dropbox-ios-sync-sdk-1.0.7\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoKeeper/PhotoKeeper-Prefix.pch";
 				INFOPLIST_FILE = "PhotoKeeper/PhotoKeeper-Info.plist";
