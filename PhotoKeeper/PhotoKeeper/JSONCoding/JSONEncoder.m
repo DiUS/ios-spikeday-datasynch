@@ -179,7 +179,11 @@
         return object;   
     }else{
         if ([object isKindOfClass:[NSData class]]) {
-            return [(NSData *) object base64EncodedString];
+          NSString *base64Encoded = [object base64EncodedString];
+          if(![base64Encoded hasSuffix:@"="]) {
+            base64Encoded = [base64Encoded stringByAppendingString:@"="];
+          }
+            return base64Encoded;
         }else if ([object isKindOfClass:[NSSet class]]) {
             return [self getEncodingForArray:[(NSSet *) object allObjects]];
             

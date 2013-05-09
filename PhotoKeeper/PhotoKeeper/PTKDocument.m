@@ -10,6 +10,8 @@
 #import "PTKData.h"
 #import "PTKMetadata.h"
 #import "UIImageExtras.h"
+#import "JSONEncoder.h"
+#import "JSONDecoder.h"
 
 #define METADATA_FILENAME   @"photo.metadata"
 #define DATA_FILENAME       @"photo.data"
@@ -25,13 +27,12 @@
 @synthesize metadata = _metadata;
 
 - (void)encodeObject:(id<NSCoding>)object toWrappers:(NSMutableDictionary *)wrappers preferredFilename:(NSString *)preferredFilename {
-    @autoreleasepool {            
-        NSMutableData * data = [NSMutableData data];
-        NSKeyedArchiver * archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-        [archiver encodeObject:object forKey:@"data"];
-        [archiver finishEncoding];
-        NSFileWrapper * wrapper = [[NSFileWrapper alloc] initRegularFileWithContents:data];
-        [wrappers setObject:wrapper forKey:preferredFilename];
+    @autoreleasepool {
+      JSONEncoder *encoder = [[JSONEncoder alloc] init];
+      [encoder encodeObject:object];
+      NSData *data = [encoder jsonAsData];
+      NSFileWrapper * wrapper = [[NSFileWrapper alloc] initRegularFileWithContents:data];
+      [wrappers setObject:wrapper forKey:preferredFilename];
     }
 }
 
@@ -57,11 +58,9 @@
         NSLog(@"Unexpected error: Couldn't find %@ in file wrapper!", preferredFilename);
         return nil;
     }
-    
-    NSData * data = [fileWrapper regularFileContents];    
-    NSKeyedUnarchiver * unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    
-    return [unarchiver decodeObjectForKey:@"data"];
+
+  NSData * data = [fileWrapper regularFileContents];
+  return  [JSONDecoder decodeWithData:data];
     
 }
 
