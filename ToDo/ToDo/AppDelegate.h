@@ -1,11 +1,3 @@
-//
-//  AppDelegate.h
-//  ToDo
-//
-//  Created by Anthony Damtsis on 9/05/13.
-//  Copyright (c) 2013 DiUS. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 #import "ToDoIncrementalStore.h"

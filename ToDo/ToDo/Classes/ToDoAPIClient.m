@@ -1,7 +1,7 @@
 #import "ToDoAPIClient.h"
 #import "AFJSONRequestOperation.h"
 
-static NSString * const kToDoAPIBaseURLString = @"<# API Base URL #>";
+static NSString * const kToDoAPIBaseURLString = @"http://192.168.0.228:9292";
 
 @implementation ToDoAPIClient
 
