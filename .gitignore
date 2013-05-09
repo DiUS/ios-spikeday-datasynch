@@ -21,3 +21,5 @@ oclint-report.html
 .DS_Store
 # Testing Temp
 xcodebuild_*.txt
+**/Pods/
+**/.idea/
