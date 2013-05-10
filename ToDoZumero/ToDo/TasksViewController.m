@@ -3,20 +3,42 @@
 #import "Task.h"
 
 @interface TasksViewController()
-  @property (nonatomic, strong) ToDoData *data;
+  @property (nonatomic, strong) ToDoData *dataObject;
+  @property (nonatomic, strong) NSArray *toDoData;
 @end
 
 @implementation TasksViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.data = [[ToDoData alloc] init];
+
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc]
+          initWithString:@"Pull to Refresh"];
+    [refresh addTarget:self action:@selector(refreshView) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+
+    self.dataObject = [[ToDoData alloc] init];
     
     self.title = NSLocalizedString(@"ToDo", nil);
+
+    self.toDoData = [self.dataObject retrieveTasks];
+    [self.tableView reloadData];
+
+}
+
+- (void) refreshView {
+  self.toDoData = [self.dataObject retrieveTasks];
+  [self.tableView reloadData];
+  [self.refreshControl endRefreshing];
 }
 
 - (IBAction)recreateDB:(id)sender {
-    [self.data initialiseStore];
+    [self.dataObject initialiseStore];
+}
+
+- (IBAction)syncDB:(id)sender {
+    [self.dataObject synchroniseToRemote];
 }
 
 #pragma mark - UITableViewDataSource
@@ -26,7 +48,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [[self.data retrieveTasks] count];
+  return [self.toDoData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -43,7 +65,7 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    Task *task = [[self.data retrieveTasks] objectAtIndex:indexPath.row];
+    Task *task = [self.toDoData objectAtIndex:indexPath.row];
     cell.textLabel.text = task.text;
     cell.textLabel.textColor = [task isCompleted] ? [UIColor lightGrayColor] : [UIColor blackColor];
 }
@@ -61,53 +83,7 @@
 }
 
 
-#pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)object
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] forRowAtIndexPath:indexPath];
-            break;
-        case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
-}
 
 #pragma mark - UITextFieldDelegate
 
@@ -115,7 +91,10 @@
     NSString *text = [textField.text copy];
     textField.text = nil;
     [textField resignFirstResponder];
-    
+    Task *task = [[Task alloc] init];
+    task.text = text;
+    [self.dataObject insertTask:task];
+
 //    [self.managedObjectContext performBlock:^{
 //        NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:self.managedObjectContext];
 //        [managedObject setValue:text forKey:@"text"];
