@@ -16,6 +16,7 @@
 		2DC1891CB0AD575716A9354B /* ActiveSupportInflector.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DC18E081BA3285F00F1DE2F /* ActiveSupportInflector.plist */; };
 		2DC18980F96BFA0E0FBCA1EF /* NSString+ActiveSupportInflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1842C656B36635EAB4BA1 /* NSString+ActiveSupportInflector.m */; };
 		2DC18B0A7F620C60AA26D817 /* ActiveSupportInflector.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC182D2C2DF2712BDD27DD2 /* ActiveSupportInflector.m */; };
+		2DC18B50E1BD933995FE2E44 /* DropBoxDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC186BE9006AFD584E07778 /* DropBoxDocument.m */; };
 		35A466CA154980F8001B56F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A466C9154980F8001B56F7 /* UIKit.framework */; };
 		35A466CC154980F8001B56F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A466CB154980F8001B56F7 /* Foundation.framework */; };
 		35A466CE154980F8001B56F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A466CD154980F8001B56F7 /* CoreGraphics.framework */; };
@@ -48,6 +49,7 @@
 		2DC18568970758529BBA243A /* JSONEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONEncoder.m; sourceTree = "<group>"; };
 		2DC185A83674F876D007DBDF /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		2DC18676521A5843798D5859 /* JSONCoding-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONCoding-Prefix.pch"; sourceTree = "<group>"; };
+		2DC186BE9006AFD584E07778 /* DropBoxDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropBoxDocument.m; sourceTree = "<group>"; };
 		2DC186D677B0B1294D0CB41C /* Readme.markdown */ = {isa = PBXFileReference; lastKnownFileType = file.markdown; path = Readme.markdown; sourceTree = "<group>"; };
 		2DC1876A9EF1A428F71701CE /* MIT-LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MIT-LICENSE"; sourceTree = "<group>"; };
 		2DC187B94AC9C3111597AD5A /* NSString+ActiveSupportInflector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ActiveSupportInflector.h"; sourceTree = "<group>"; };
@@ -56,7 +58,9 @@
 		2DC18CF09E705E89374BFCD1 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		2DC18E081BA3285F00F1DE2F /* ActiveSupportInflector.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = ActiveSupportInflector.plist; sourceTree = "<group>"; };
 		2DC18E9684A35A57585841C9 /* JSONEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONEncoder.h; sourceTree = "<group>"; };
+		2DC18EDD747F3DB0D8E0AB86 /* Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
 		2DC18EEEB5D59941D30F3BFC /* ActiveSupportInflector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveSupportInflector.h; sourceTree = "<group>"; };
+		2DC18F1D79282437867B2D21 /* DropBoxDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropBoxDocument.h; sourceTree = "<group>"; };
 		2DC18F42054B8B33BD241ACA /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		35A466C5154980F8001B56F7 /* PhotoKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35A466C9154980F8001B56F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -115,6 +119,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DC18907642A4230AA993079 /* DropBox */ = {
+			isa = PBXGroup;
+			children = (
+				2DC186BE9006AFD584E07778 /* DropBoxDocument.m */,
+				2DC18F1D79282437867B2D21 /* DropBoxDocument.h */,
+			);
+			name = DropBox;
+			sourceTree = "<group>";
+		};
 		2DC18A5B0FCF4516DF96E7A6 /* JSONCoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +215,8 @@
 				35A466EF15499F08001B56F7 /* PTKMetadata.m */,
 				35A466F11549A020001B56F7 /* PTKDocument.h */,
 				35A466F21549A020001B56F7 /* PTKDocument.m */,
+				2DC18907642A4230AA993079 /* DropBox */,
+				2DC18EDD747F3DB0D8E0AB86 /* Document.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -347,6 +362,7 @@
 				2DC183B90772BF1AF926FEAC /* NSString+Additions.m in Sources */,
 				2DC18B0A7F620C60AA26D817 /* ActiveSupportInflector.m in Sources */,
 				2DC18980F96BFA0E0FBCA1EF /* NSString+ActiveSupportInflector.m in Sources */,
+				2DC18B50E1BD933995FE2E44 /* DropBoxDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

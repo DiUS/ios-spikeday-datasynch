@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <Dropbox/Dropbox.h>
 #import "PTKAppDelegate.h"
 
 @implementation PTKAppDelegate
@@ -15,7 +16,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+  DBAccountManager* accountMgr =
+          [[DBAccountManager alloc] initWithAppKey:@"xbo5bknoba9c21c" secret:@"hm0eho35wf5von4"];
+  [DBAccountManager setSharedManager:accountMgr];
+
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation {
+  DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
+  if (account) {
+    NSLog(@"App linked successfully!");
+    return YES;
+  }
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

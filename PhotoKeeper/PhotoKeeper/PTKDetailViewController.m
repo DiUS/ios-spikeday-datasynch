@@ -10,6 +10,8 @@
 #import "PTKDocument.h"
 #import "PTKData.h"
 #import "UIImageExtras.h"
+#import "Document.h"
+#import "DropBoxDocument.h"
 
 @interface PTKDetailViewController ()
 - (void)configureView;
@@ -87,13 +89,16 @@
 
 - (void)doneTapped:(id)sender {
         
-    NSLog(@"Closing %@...", self.doc.fileURL);
-    
-    [self.doc saveToURL:self.doc.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
-        [self.doc closeWithCompletionHandler:^(BOOL success) {
+    NSLog(@"Closing %@...", self.doc.description);
+
+  if([self.doc isKindOfClass:[PTKDocument class] ])
+  {
+    PTKDocument *doc = (PTKDocument *)self.doc;
+    [doc saveToURL:doc.fileURL forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success) {
+        [doc closeWithCompletionHandler:^(BOOL success) {
             dispatch_async(dispatch_get_main_queue(), ^{                        
                 if (!success) {
-                    NSLog(@"Failed to close %@", self.doc.fileURL);
+                    NSLog(@"Failed to close %@", doc.fileURL);
                     // Continue anyway...
                 }
                 
@@ -101,7 +106,11 @@
             });
         }];
     }];
-    
+  } else {
+    DropBoxDocument *doc = (DropBoxDocument *)self.doc;
+    [doc saveDocument];
+    [self.delegate detailViewControllerDidClose:self];
+  }
 }
 
 #pragma mark UIImagePickeerControllerDelegate
@@ -121,7 +130,7 @@
     
     self.doc.photo = sImage;
     self.imageView.image = sImage;
-    
+
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }

@@ -15,7 +15,7 @@
 @synthesize state = _state;
 @synthesize version = _version;
 
-- (id)initWithFileURL:(NSURL *)fileURL metadata:(PTKMetadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version {
+- (id)initWithFileURL:(NSString *)fileURL metadata:(PTKMetadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version {
     
     if ((self = [super init])) {
         self.fileURL = fileURL;
@@ -28,7 +28,7 @@
 }
 
 - (NSString *) description {
-    return [[self.fileURL lastPathComponent] stringByDeletingPathExtension];
+    return [[[NSURL URLWithString:self.fileURL] lastPathComponent] stringByDeletingPathExtension];
 }
 
 @end

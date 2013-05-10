@@ -12,12 +12,12 @@
 
 @interface PTKEntry : NSObject
 
-@property (strong) NSURL * fileURL;
+@property (strong) NSString * fileURL;
 @property (strong) PTKMetadata * metadata;
 @property (assign) UIDocumentState state;
 @property (strong) NSFileVersion * version;
 
-- (id)initWithFileURL:(NSURL *)fileURL metadata:(PTKMetadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version;
+- (id)initWithFileURL:(NSString *)fileURL metadata:(PTKMetadata *)metadata state:(UIDocumentState)state version:(NSFileVersion *)version;
 - (NSString *) description;
 
 @end

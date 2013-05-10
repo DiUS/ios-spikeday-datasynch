@@ -100,6 +100,10 @@
     
 }
 
+- (PTKMetadata *)getMetadata {
+  return self.metadata;
+}
+
 - (NSString *) description {
     return [[self.fileURL lastPathComponent] stringByDeletingPathExtension];
 }

@@ -10,6 +10,7 @@
 
 @class PTKDocument;
 @class PTKDetailViewController;
+@protocol Document;
 
 @protocol PTKDetailViewControllerDelegate 
 - (void)detailViewControllerDidClose:(PTKDetailViewController *)detailViewController;
@@ -17,7 +18,7 @@
 
 @interface PTKDetailViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (strong, nonatomic) PTKDocument * doc;
+@property (strong, nonatomic) id<Document> doc;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak) id <PTKDetailViewControllerDelegate> delegate;
 

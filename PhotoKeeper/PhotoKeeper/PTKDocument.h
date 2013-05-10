@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Document.h"
 
 @class PTKData;
 @class PTKMetadata;
 
 #define PTK_EXTENSION @"ptk"
 
-@interface PTKDocument : UIDocument
+@interface PTKDocument : UIDocument <Document>
 
 // Data
 - (UIImage *)photo;
