@@ -1,13 +1,11 @@
-//
-//  ToDoData.h
-//  ToDo
-//
-//  Created by Anthony Damtsis on 10/05/13.
-//  Copyright (c) 2013 Heroku. All rights reserved.
-//
-
 #import <Zumero/Zumero.h>
+@class Task;
 
 @interface ToDoData : NSObject
+
+- (void) initialiseStore;
+- (NSArray *) retrieveTasks;
+- (void) insertTask:(Task *) task;
+- (void) updateTask:(Task *) task;
 
 @end

@@ -1,30 +1,32 @@
 #import "TasksViewController.h"
-
+#import "ToDoData.h"
 #import "Task.h"
+
+@interface TasksViewController()
+  @property (nonatomic, strong) ToDoData *data;
+@end
 
 @implementation TasksViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.data = [[ToDoData alloc] init];
     
     self.title = NSLocalizedString(@"ToDo", nil);
-    
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
-//    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"completedAt" ascending:NO]];
-    
-    
+}
+
+- (IBAction)recreateDB:(id)sender {
+    [self.data initialiseStore];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return [[self.fetchedResultsController sections] count];
-    return nil;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return [[[self.fetchedResultsController sections] objectAtIndex:section] numberOfObjects];
-    return nil;
+  return [[self.data retrieveTasks] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -41,9 +43,9 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    Task *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.textLabel.text = task.text;
-//    cell.textLabel.textColor = [task isCompleted] ? [UIColor lightGrayColor] : [UIColor blackColor];
+    Task *task = [[self.data retrieveTasks] objectAtIndex:indexPath.row];
+    cell.textLabel.text = task.text;
+    cell.textLabel.textColor = [task isCompleted] ? [UIColor lightGrayColor] : [UIColor blackColor];
 }
 
 #pragma mark - UITableViewDelegate
